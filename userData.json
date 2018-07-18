@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "_id": 0,
+            "f_name": "Lenny",
+            "l_name": "Claes",
+            "pass": "Test123",
+            "character": "test",
+            "costume": "test",
+            "description": "This is a test account"
+        }
+    ]
+}

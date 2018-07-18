@@ -1,0 +1,11 @@
+<header>
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/uitnodiging">UITNODIGING</a>
+        <a href="/tips">TIPS</a>
+        <a href="/opdrachten">OPDRACHTEN</a>
+        <% if(logged_in) { %>
+            <a href="/user/logout">LOGOUT</a>
+        <% } %>
+    </nav>
+</header>

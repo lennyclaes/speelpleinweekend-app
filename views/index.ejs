@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+<body>
+    <%- include('partials/header') %>
+    <div id="main">
+        <div class="top">
+            <div class="page-title">
+                <h1><%= title %></h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-left">
+                <% if(user) { %>
+                <h2><%= user.name %></h2>
+                <ul>
+                    <li>Karakter: <%= user.character %></li>
+                    <li>Kostuum: <%= user.costume %></li>
+                    <li>Omschrijving: <%= user.description %></li>
+                </ul>
+                <% } else { %>
+                    <h2>Something went wrong fetching your data :-S</h2>
+                <% } %>
+            </div>
+            <div class="section-right">
+                <h2>Speelpleinweekend 3018</h2>
+                <p>
+                    Een weekend waar de toekomst het heden wordt <br>
+                    waar alleen maar bier gedronken wordt <br>
+                    waar we samen op ontdekkingsreis gaan <br>
+                    kortom, een weekend om eens helemaal los te gaan!
+                </p>
+            </div>
+        </div>    
+    </div>
+</body>
+</html>

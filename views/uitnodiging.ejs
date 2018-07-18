@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+<body>
+    <%- include('partials/header') %>
+    <div id="main">
+        <div class="top">
+            <div class="page-title">
+                <h1><%= title %></h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-left">
+                <% if(user) { %>
+                <h2><%= user.name %></h2>
+                <ul>
+                    <li>Karakter: <%= user.character %></li>
+                    <li>Kostuum: <%= user.costume %></li>
+                    <li>Omschrijving: <%= user.description %></li>
+                </ul>
+                <% } else { %>
+                    <h2>Something went wrong fetching your data :-S</h2>
+                <% } %>
+            </div>
+            <div class="section-right">
+                <% if(logged_in) { %>
+                    <p>Do stuff</p>
+                <% } else { %>
+                    <form action="/user/login" method="POST">
+                        <input name="name" type="text" placeholder="Jouw naam"> <br>
+                        <input name="pass" type="password" placeholder="Jouw wachtwoord"> <br>
+                        <button type="submit" class="action">LOG IN</button>
+                    </form>
+                <% } %>
+            </div>
+        </div>    
+    </div>
+</body>
+</html>
