@@ -24,7 +24,16 @@
             </div>
             <div class="section-right">
                 <% if(logged_in) { %>
-                    <p>Do stuff</p>
+                    <h2>Dag <%= user.name %></h2>
+                    <p>of beter gekend als <%= user.character %></p>
+                    <br>
+                    <p>
+                        Op 7 september is het weer van dat <br>
+                        ons jaarlijks speelpleinweekend gaat weer van start!
+                    </p>
+                    <p>
+                         
+                    </p>
                 <% } else { %>
                     <form action="/user/login" method="POST">
                         <input name="name" type="text" placeholder="Jouw naam"> <br>

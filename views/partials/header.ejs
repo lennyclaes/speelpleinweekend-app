@@ -4,6 +4,9 @@
         <a href="/uitnodiging">UITNODIGING</a>
         <a href="/tips">TIPS</a>
         <a href="/opdrachten">OPDRACHTEN</a>
+        <% if(user.is_admin) { %>
+            <a href="/admin">ADMIN</a>
+        <% } %>
         <% if(logged_in) { %>
             <a href="/user/logout">LOGOUT</a>
         <% } %>

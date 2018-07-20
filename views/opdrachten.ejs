@@ -11,7 +11,25 @@
         </div>
         <div class="container">
             <div class="section-left">
-                
+                <% if(logged_in) { %>
+                    <% if(user) { %>
+                    <h2><%= user.name %></h2>
+                    <ul>
+                        <li>Karakter: <%= user.character %></li>
+                        <li>Kostuum: <%= user.costume %></li>
+                        <li>Omschrijving: <%= user.description %></li>
+                    </ul>
+                    <% } else { %>
+                        <h2>Something went wrong fetching your data :-S</h2>
+                    <% } %>
+                <% } else { %>
+                    <h2>Log in</h2>
+                    <form action="/user/login" method="POST">
+                        <input name="name" type="text" placeholder="Jouw naam"> <br>
+                        <input name="pass" type="password" placeholder="Jouw wachtwoord"> <br>
+                        <button type="submit" class="action">LOG IN</button>
+                    </form>
+                <% } %>
             </div>
             <div class="section-right">
                 

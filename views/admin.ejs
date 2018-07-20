@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+<body>
+    <%- include('partials/header') %>
+    <div id="main">
+        <div class="top">
+            <div class="page-title">
+                <h1><%= title %></h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-left">
+                <ul>
+                    <li><a href="/admin/users">Users</a></li>
+                    <li><a href="/admin/tips">Tips</a></li>
+                    <li><a href="/admin/opdrachten">Opdrachten</a></li>
+                </ul>
+            </div>
+            <div class="section-right">
+                <% if(list == "users") { %>
+                    <div id="actions">
+                        <form action="/user/create" method="POST">
+                            <input name="f_name" type="text" placeholder="Voornaam"><br>
+                            <input name="l_name" type="text" placeholder="Familienaam"><br>
+                            <input name="character" type="text" placeholder="Karakter"><br>
+                            <input name="costume" type="text" placeholder="Kostuum"><br>
+                            <input name="description" type="text" placeholder="Beschrijving"><br>
+                            <input name="pass" type="text" placeholder="Wachtwoord"><br>
+                            <button type="submit" class="action">VOEG TOE</button>
+                        </form>
+                    </div>
+                    <% for(let i = 0; i < userslist.length; i++) { %>
+                        <div class="user-box">
+                            <div class="user-name">
+                                <h2><%= userslist[i].f_name + " " + userslist[i].l_name %></h2>
+                            </div>
+                            <div class="user-info">
+                                <ul>
+                                    <li>Karakter: <%= userslist[i].character %></li>
+                                    <li>Kostuum: <%= userslist[i].costume %></li>
+                                    <li>Beschrijving: <%= userslist[i].description %></li>
+                                    <li>Wachtwoord: <%= userslist[i].pass %></li>
+                                    <li>Admin: <%= userslist[i].is_admin %></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>    
+    </div>
+</body>
+</html>
