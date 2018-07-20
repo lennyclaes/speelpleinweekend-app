@@ -74,7 +74,7 @@ nav a {
     list-style: none;
 }
 
-.section-left ul li {
+.section-left ul li, .section-left ul li a {
     color: #fff;
     padding: 5px;
     font-family: 'Abel', sans-serif;
@@ -118,9 +118,8 @@ nav a {
 
 .user-box {
     border: 1px solid #1f1f1f;
-    margin-bottom: 10px;
+    margin: 10px 0;
     border-bottom: none;
-    box-shadow: 0 0 3px 1px #339;
 }
 
 .user-name {
@@ -145,4 +144,12 @@ nav a {
     font-family: 'Abel', sans-serif;
     color: #fff;
     background: #333;
+}
+
+.action-link {
+    text-decoration: none;
+}
+
+.danger {
+    color: #933;
 }

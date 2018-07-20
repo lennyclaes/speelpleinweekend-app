@@ -32,14 +32,6 @@
                 <% } %>
             </div>
             <div class="section-right">
-                <% if(user.is_admin) { %>
-                    <div id="actions">
-                        <form action="/tips/create" method="POST">
-                            <input name="tip" type="text" placeholder="Tip...">
-                            <button type="submit" class="action">VOEG TOE</button>
-                        </form>
-                    </div>
-                <% } %>
                 <% for(let i = 0; i < tips.length; i++) { %>
                     <h2>Tip <%= tips[i]._id + 1 %></h2>
                     <p><%= tips[i].tip %> 

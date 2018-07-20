@@ -133,7 +133,7 @@ app.post('/tips/create', (req, res) => {
         fs.writeFile('./tips.json', dataToBeSaved, (err) => {
             tipData = fs.readFileSync('./tips.json');
             tipData = JSON.parse(tipData);
-            res.redirect('/tips');
+            res.redirect('/admin/tips');
         });
     } else {
         res.redirect('/tips');
@@ -146,7 +146,7 @@ app.get('/tips/delete/:id', (req, res) => {
     fs.writeFile('./tips.json', dataToBeSaved, (err) => {
         tipData = fs.readFileSync('./tips.json');
         tipData = JSON.parse(tipData);
-        res.redirect('/tips');
+        res.redirect('/admin/tips');
     });
 });
 
@@ -215,9 +215,11 @@ app.get('/admin/tips', (req, res) => {
         user = req.session.user;
         if(user.is_admin) {     
             res.render('admin.ejs', {
+                "logged_in": req.session.logged_in,
                 "title": "Admin page",
                 "user": user,
-                "logged_in": req.session.logged_in
+                "list": "tips",
+                "tipslist": tipData.tips
             });
         }
     } else {
@@ -241,7 +243,9 @@ app.get('/admin/opdrachten', (req, res) => {
             res.render('admin.ejs', {
                 "title": "Admin page",
                 "user": user,
-                "logged_in": req.session.logged_in
+                "logged_in": req.session.logged_in,
+                "list": "opdrachten",
+                "opdrachtenlist": opdrachtData.opdrachten
             });
         }
     } else {
