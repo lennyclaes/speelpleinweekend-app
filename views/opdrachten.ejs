@@ -32,7 +32,10 @@
                 <% } %>
             </div>
             <div class="section-right">
-                
+                <% for(let i = 0; i < opdrachten.length; i++) { %>
+                    <h2>Opdracht <%= opdrachten[i]._id + 1 %></h2>
+                    <p><%= opdrachten[i].opdracht %></p>
+                <% } %>
             </div>
         </div>    
     </div>

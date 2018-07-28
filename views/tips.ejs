@@ -34,11 +34,7 @@
             <div class="section-right">
                 <% for(let i = 0; i < tips.length; i++) { %>
                     <h2>Tip <%= tips[i]._id + 1 %></h2>
-                    <p><%= tips[i].tip %> 
-                        <% if(user.is_admin) { %>
-                            <a href="/tips/delete/<%= i %>" class="action-link danger">Verwijder</a>
-                        <% } %>
-                    </p>
+                    <p><%= tips[i].tip %></p>
                 <% } %>
             </div>
         </div>    

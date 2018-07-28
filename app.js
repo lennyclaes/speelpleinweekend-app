@@ -112,7 +112,7 @@ app.get('/opdrachten', (req, res) => {
         "logged_in": req.session.loggedIn,
         "title": "Speelpleinweekend 3018 - Opdrachten",
         "user": user,
-        "opdrachten": opdrachtData
+        "opdrachten": opdrachtData.opdrachten
     });
 });
 
@@ -136,7 +136,7 @@ app.post('/tips/create', (req, res) => {
             res.redirect('/admin/tips');
         });
     } else {
-        res.redirect('/tips');
+        res.redirect('/admin/tips');
     }
 });
 
@@ -147,6 +147,40 @@ app.get('/tips/delete/:id', (req, res) => {
         tipData = fs.readFileSync('./tips.json');
         tipData = JSON.parse(tipData);
         res.redirect('/admin/tips');
+    });
+});
+
+app.get('/opdrachten/create', (req, res) => {
+    res.statusCode = 403;
+    res.send("You shouldn't be here!");
+});
+
+app.post('/opdrachten/create', (req, res) => {
+    let opdracht = req.body.opdracht;
+
+    if(opdracht) {
+        opdrachtData.opdrachten.push({
+            "_id": opdrachtData.opdrachten.length,
+            "opdracht": opdracht
+        });
+        let dataToBeSaved = JSON.stringify(opdrachtData);
+        fs.writeFile('./opdrachten.json', dataToBeSaved, (err) => {
+            opdrachtData = fs.readFileSync('./opdrachten.json');
+            opdrachtData = JSON.parse(opdrachtData);
+            res.redirect('/admin/opdrachten');
+        });
+    } else {
+        res.redirect('/admin/opdrachten');
+    }
+});
+
+app.get('/opdrachten/delete/:id', (req, res) => {
+    opdrachtData.opdrachten.splice(req.params.id, 1);
+    let dataToBeSaved = JSON.stringify(opdrachtData);
+    fs.writeFile('./opdrachten.json', dataToBeSaved, (err) => {
+        opdrachtData = fs.readFileSync('./opdrachten.json');
+        opdrachtData = JSON.parse(opdrachtData);
+        res.redirect('/admin/opdrachten');
     });
 });
 
@@ -269,6 +303,11 @@ app.post('/user/login', (req, res) => {
             uid++;
         }
 
+        if(uid >= userData.users.length) {
+            res.redirect('/');
+            return;
+        }
+
         if(pass == userData.users[uid].pass) {
             req.session.loggedIn = true;
             req.session.user = {
@@ -324,6 +363,4 @@ app.post('/user/create', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('server started at port 3000');
-});
+app.listen(process.env.PORT || 3000);

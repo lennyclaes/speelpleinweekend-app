@@ -66,6 +66,26 @@
                             </div>
                         </div>
                     <% } %>
+                <% } else if(list == "opdrachten") { %>
+                    <div id="actions">
+                        <form action="/opdrachten/create" method="POST">
+                            <input name="opdracht" type="text" placeholder="Opdracht...">
+                            <button type="submit" class="action">VOEG TOE</button>
+                        </form>
+                    </div>
+                    <% for(let i = 0; i < opdrachtenlist.length; i++) { %>
+                        <div class="user-box">
+                            <div class="user-name">
+                                <h2>Opdracht <%= opdrachtenlist[i]._id + 1 %></h2>
+                            </div>
+                            <div class="user-info">
+                                <ul>
+                                    <li><%= opdrachtenlist[i].opdracht %></li>
+                                    <li><a href="/opdrachten/delete/<%= i %>" class="action-link danger">Verwijder</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
                 <% } %>
             </div>
         </div>    

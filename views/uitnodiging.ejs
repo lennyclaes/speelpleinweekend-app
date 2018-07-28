@@ -29,10 +29,47 @@
                     <br>
                     <p>
                         Op 7 september is het weer van dat <br>
-                        ons jaarlijks speelpleinweekend gaat weer van start!
+                        ons jaarlijks speelpleinweekend gaat weer van start! <br>
+                        en ook jij wordt er verwacht!
                     </p>
+                    <h2>Waar, wanneer en hoe?</h2>
                     <p>
-                         
+                        Om 18u00 aan het station van <%= user.station %>
+                    </p>
+                    <br>
+                    <p>
+                        De mensen zullen even hun ogen open trekken als ze zien dat plots <%= user.costume %> voor hun neus staat! <br>
+                        Het zou natuurlijk al rap wat saai worden en daarom ben jij <%= user.character %>!
+                    </p>
+                    <br>
+                    <p>
+                        <%= user.story %>
+                    </p>
+                    <h2>Wat breng ik mee?</h2>
+                    <ul class="styled-list">
+                        <li>
+                            Slaapzak en -matje
+                        </li>
+                        <li>
+                            Uw schoonste pyjama
+                        </li>
+                        <li>
+                            Vers ondergoed (extra kleren komen meestal ook wel van pas)
+                        </li>
+                        <li>
+                            Jouw toiletzak (of die van iemand anders)
+                        </li>
+                        <li>
+                            Jouw zwemgerief! (of niet)
+                        </li>
+                        <li>
+                            Jouw goed humeur en veel zonneschijn
+                        </li>
+                    </ul>
+                    <br>
+                    <p>
+                        Wij zijn er helemaal klaar voor! <br>
+                        Jij ook?
                     </p>
                 <% } else { %>
                     <form action="/user/login" method="POST">
