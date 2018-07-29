@@ -8,6 +8,48 @@
     margin: auto;
 }
 
+.dropdown-menu-wrap {
+    display: none;
+    
+}
+
+.menu-btn {
+    width: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.menu-btn-line {
+    width: 100%;
+    height: 4px;
+    margin: 3px 0;
+    background: #fff;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    left: 0;
+    background: #0009;
+    display: block;
+    text-align: center;
+    display: none;
+    transition: 0.5s linear;
+}
+
+.dropdown-content.show {
+    display: block
+}
+
+.dropdown-content a {
+    display: block;
+    width: 100%;
+}
+
 header {
     background: transparent;
     position: fixed;
@@ -152,4 +194,19 @@ nav a {
 
 .danger {
     color: #933;
+}
+
+@media (max-width: 860px) {
+    .section-left, .section-right {
+        float: none;
+        width: 100%;
+    }
+
+    nav a {
+        display: none;
+    }
+
+    .dropdown-menu-wrap {
+        display: block;
+    }
 }
