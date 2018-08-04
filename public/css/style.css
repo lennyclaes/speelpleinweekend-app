@@ -75,6 +75,10 @@ nav a {
     font-size: 22px;
 }
 
+#main {
+    display: block;
+}
+
 .top {
     height: 55vh;
     background: url('../img/bg_top.jpeg') center center fixed no-repeat;
@@ -196,10 +200,25 @@ nav a {
     color: #933;
 }
 
+footer {
+    padding: 10px;
+    background: #333;
+    text-align: center;
+    color: #FFF;
+    font-family: 'Abel', sans-serif;
+    display: block;
+}
+
 @media (max-width: 860px) {
+    .container {
+        width: 90%;
+        margin: auto;
+    }
+
     .section-left, .section-right {
         float: none;
-        width: 100%;
+        width: 90%;
+        margin: 30px auto;
     }
 
     nav a {
@@ -208,5 +227,12 @@ nav a {
 
     .dropdown-menu-wrap {
         display: block;
+    }
+
+    .top .page-title {
+        width: 100%;
+        left: 0;
+        right: 0;  
+        padding: 10px 0; 
     }
 }

@@ -58,7 +58,8 @@ app.get('/uitnodiging', (req, res) => {
         "name": "Anonymous",
         "character": "Unknown",
         "costume": "Unknown",
-        "description": "Unknown"
+        "description": "Unknown",
+        "station": "Unknown"
     }
 
     if(req.session.user) {
@@ -316,6 +317,7 @@ app.post('/user/login', (req, res) => {
                 "character": userData.users[uid].character,
                 "costume": userData.users[uid].costume,
                 "description": userData.users[uid].description,
+                "station": userData.users[uid].station,
                 "is_admin": userData.users[uid].is_admin
             };
             res.redirect('/uitnodiging');
