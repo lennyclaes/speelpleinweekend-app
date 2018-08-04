@@ -4,12 +4,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const session = require('express-session');
+const firebase = require('./modules/firebase');
 
-let userData = fs.readFileSync('./userData.json');
 let tipData = fs.readFileSync('./tips.json');
 let opdrachtData = fs.readFileSync('./opdrachten.json');
 
-userData = JSON.parse(userData);
 tipData = JSON.parse(tipData);
 opdrachtData = JSON.parse(opdrachtData);
 
@@ -59,7 +58,8 @@ app.get('/uitnodiging', (req, res) => {
         "character": "Unknown",
         "costume": "Unknown",
         "description": "Unknown",
-        "station": "Unknown"
+        "station": "Unknown",
+        "is_admin": false
     }
 
     if(req.session.user) {
@@ -204,6 +204,8 @@ app.get('/admin', (req, res) => {
                 "user": user,
                 "list": ""
             });
+        } else {
+            res.redirect('/');
         }
     } else {
         res.redirect('/');
@@ -222,14 +224,21 @@ app.get('/admin/users', (req, res) => {
 
     if(req.session.user) {
         user = req.session.user;
-        if(user.is_admin) {     
-            res.render('admin.ejs', {
-                "logged_in": req.session.logged_in,
-                "title": "Admin page",
-                "user": user,
-                "list": "users",
-                "userslist": userData.users
-            });
+        if(user.is_admin = 'true') {
+            firebase.getUsers((err, data) => {
+                if(err) {
+                    res.redirect('/admin/users');
+                } else {
+                    res.render('admin.ejs', {
+                        "logged_in": req.session.logged_in,
+                        "title": "Admin page",
+                        "user": user,
+                        "list": "users",
+                        "userslist": data
+                    });
+                }
+            })
+            
         }
     } else {
         res.redirect('/');
@@ -298,35 +307,29 @@ app.post('/user/login', (req, res) => {
     let pass = req.body.pass;
 
     if(name && pass) {  
-        let uid = 0;
-
-        while(uid < userData.users.length && name != userData.users[uid].f_name) {
-            uid++;
-        }
-
-        if(uid >= userData.users.length) {
-            res.redirect('/');
-            return;
-        }
-
-        if(pass == userData.users[uid].pass) {
-            req.session.loggedIn = true;
-            req.session.user = {
-                "_id": uid,
-                "name": name + " " + userData.users[uid].l_name,
-                "character": userData.users[uid].character,
-                "costume": userData.users[uid].costume,
-                "description": userData.users[uid].description,
-                "station": userData.users[uid].station,
-                "is_admin": userData.users[uid].is_admin
-            };
-            res.redirect('/uitnodiging');
-        } else {
-            req.session.loggedIn = false;
-            res.redirect('/uitnodiging');
-        }
+        firebase.getUserByName(name, (err, data) => {
+            if(err) {
+                return err;
+            } else {
+                if(pass = data.pass) {
+                    req.session.loggedIn = true;
+                    req.session.user = {
+                        "_id": data.uid,
+                        "name": name + " " + data.l_name,
+                        "character": data.character,
+                        "costume": data.costume,
+                        "description": data.description,
+                        "station": data.station,
+                        "is_admin": data.is_admin
+                    };
+                    res.redirect('/uitnodiging');
+                } else {
+                    req.session.loggedIn = false;
+                    res.redirect('/uitnodiging');
+                }
+            }
+        });
     } else {
-        req.session.loggedIn = false;
         res.redirect('/uitnodiging');
     }
 });
@@ -346,9 +349,12 @@ app.post('/user/create', (req, res) => {
     let description = req.body.description;
     let station = req.body.station;
     let pass = req.body.pass;
-    
-    userData.users.push({
-        "_id": userData.users.length,
+    let isAdmin = req.body.isadmin;
+  
+    let uid = Date.now();
+
+    let user = {
+        "uid": uid,
         "f_name": fName,
         "l_name": lName,
         "pass": pass,
@@ -356,24 +362,17 @@ app.post('/user/create', (req, res) => {
         "costume": costume,
         "description": description,
         "station": station,
-        "is_admin": false
-    });
-    let dataToBeSaved = JSON.stringify(userData);
-    fs.writeFile('./userData.json', dataToBeSaved, (err) => {
-        userData = fs.readFileSync('./userData.json');
-        userData = JSON.parse(userData);
+        "is_admin": isAdmin
+    };
+
+    firebase.saveUser(user, () => {
         res.redirect('/admin/users');
     });
 });
 
 app.get('/user/delete/:id', (req, res) => {
-    userData.users.splice(req.params.id, 1);
-    let dataToBeSaved = JSON.stringify(userData);
-    fs.writeFile('./userData.json', dataToBeSaved, (err) => {
-        userData = fs.readFileSync('./userData.json');
-        userData = JSON.parse(userData);
-        res.redirect('/admin/users');
-    });
+    firebase.deleteUser(req.params.id);
+    res.redirect('/admin/users');
 });
 
 

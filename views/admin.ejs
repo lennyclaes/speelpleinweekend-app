@@ -28,6 +28,10 @@
                             <input name="description" type="text" placeholder="Beschrijving"><br>
                             <input name="station" type="text" placeholder="Station"><br>
                             <input name="pass" type="text" placeholder="Wachtwoord"><br>
+                            <select name="isadmin">
+                                <option value="false" selected="selected">Geen administrator</option>
+                                <option value="true">Administrator</option>
+                            </select><br>
                             <button type="submit" class="action">VOEG TOE</button>
                         </form>
                     </div>
@@ -44,7 +48,7 @@
                                     <li>Station: <%= userslist[i].station %></li>
                                     <li>Wachtwoord: <%= userslist[i].pass %></li>
                                     <li>Admin: <%= userslist[i].is_admin %></li>
-                                    <li><a href="/user/delete/<%= i %>" class="action-link danger">Verwijder</a></li>
+                                    <li><a href="/user/delete/<%= userslist[i].uid %>" class="action-link danger">Verwijder</a></li>
                                 </ul>
                             </div>
                         </div>
