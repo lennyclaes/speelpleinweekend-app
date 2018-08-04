@@ -342,6 +342,7 @@ app.post('/user/create', (req, res) => {
     let costume = req.body.costume;
     let character = req.body.character;
     let description = req.body.description;
+    let station = req.body.station;
     let pass = req.body.pass;
     
     userData.users.push({
@@ -352,6 +353,7 @@ app.post('/user/create', (req, res) => {
         "character": character,
         "costume": costume,
         "description": description,
+        "station": station,
         "is_admin": false
     });
     let dataToBeSaved = JSON.stringify(userData);
