@@ -366,5 +366,15 @@ app.post('/user/create', (req, res) => {
     });
 });
 
+app.get('/user/delete/:id', (req, res) => {
+    userData.users.splice(req.params.id, 1);
+    let dataToBeSaved = JSON.stringify(userData);
+    fs.writeFile('./userData.json', dataToBeSaved, (err) => {
+        userData = fs.readFileSync('./userData.json');
+        userData = JSON.parse(userData);
+        res.redirect('/admin/users');
+    });
+});
+
 
 app.listen(process.env.PORT || 3000);

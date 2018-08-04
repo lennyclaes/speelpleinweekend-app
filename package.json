@@ -1,6 +1,6 @@
 {
   "name": "speelpleinweekend-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A webapp for Speelpleinweekend 3018",
   "main": "app.js",
   "scripts": {
